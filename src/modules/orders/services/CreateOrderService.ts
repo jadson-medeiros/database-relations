@@ -22,8 +22,10 @@ class CreateOrderService {
   constructor(
     @inject('OrdersRepository')
     private ordersRepository: IOrdersRepository,
+
     @inject('ProductsRepository')
     private productsRepository: IProductsRepository,
+
     @inject('CustomersRepository')
     private customersRepository: ICustomersRepository,
   ) {}
@@ -32,7 +34,7 @@ class CreateOrderService {
     // TODO
     const customerExists = await this.customersRepository.findById(customer_id);
 
-    if (customerExists) {
+    if (!customerExists) {
       throw new AppError('Could not find any customer with the given id');
     }
 
